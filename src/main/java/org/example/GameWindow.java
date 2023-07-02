@@ -12,12 +12,13 @@ public class GameWindow extends JFrame {
 
     public GameWindow() {
         setTitle("Гра Міста");
-        setSize(400, 500);
+        setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         inputField = new JTextField();
         computerLabel = new JLabel();
+        computerLabel.setText("Компютер");
         playButton = new JButton("Зробити хід");
 
         JPanel panel = new JPanel();
