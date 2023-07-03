@@ -10,6 +10,18 @@ public class GameWindow extends JFrame {
     private final JLabel computerLabel;
     private final JButton playButton;
 
+    public JButton getMakeMoveButton() {
+        return playButton;
+    }
+
+    public JTextField getCityTextField() {
+        return inputField;
+    }
+
+    public JLabel getComputerResponseLabel() {
+        return computerLabel;
+    }
+
     public GameWindow() {
         setTitle("Гра Міста");
         setSize(500, 400);
