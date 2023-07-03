@@ -25,6 +25,7 @@ public class ComputerTurn implements Utils{
         String response="";
         if (!city.isEmpty()){
             response = ukrainianCities.getCities().stream()  //перетворює коллекцію з містами в стрім
+                    .filter(c -> equals(city))
                     .filter(c -> !c.endsWith("й"))
                     .filter(c -> {
                         String lastLetter = city.substring(city.length() - 1).toUpperCase(); //знаходить останню букву
