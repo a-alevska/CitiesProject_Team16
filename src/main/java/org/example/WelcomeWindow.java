@@ -20,6 +20,7 @@ public class WelcomeWindow extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Закрити вітальне вікно
                 new GameWindow(); // Відкрити вікно гри
+                new UserTurn().makeMove();
             }
         });
 
@@ -42,8 +43,6 @@ public class WelcomeWindow extends JFrame {
         GameWindow gameWindow = new GameWindow();
         gameWindow.setVisible(true);
         dispose();
-        UserTurn game = new UserTurn();
-        game.makeMove();
     }
 
     public static void main(String[] args) {
