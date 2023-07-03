@@ -27,9 +27,23 @@ public class WelcomeWindow extends JFrame {
         panel.add(label);
         panel.add(startButton);
 
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                openGameWindow();
+            }
+        });
+
         add(panel);
 
         setVisible(true);
+    }
+
+    private void openGameWindow() {
+        GameWindow gameWindow = new GameWindow();
+        gameWindow.setVisible(true);
+        dispose();
+        UserTurn game = new UserTurn();
+        game.makeMove();
     }
 
     public static void main(String[] args) {
