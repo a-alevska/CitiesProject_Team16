@@ -1,7 +1,6 @@
 package org.example;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,8 +30,7 @@ public class GameWindow extends JFrame {
 
         inputField = new JTextField();
         computerLabel = new JLabel();
-        computerLabel.setText("Компьютер:");
-        computerLabel.setBorder(new EmptyBorder(20, 10, 300, 20));
+        computerLabel.setText("Компютер");
         playButton = new JButton("Зробити хід");
 
         JPanel panel = new JPanel();
@@ -44,11 +42,6 @@ public class GameWindow extends JFrame {
         add(panel);
 
         setVisible(true);
-        inputField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                playButton.doClick(); // Enter = "Зробити хід"
-            }
-        });
     }
 
     public static void main(String[] args) {
