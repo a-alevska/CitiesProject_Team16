@@ -16,6 +16,7 @@ public class WelcomeWindow extends JFrame {
 
         label = new JLabel("Ласкаво просимо до гри Міста!");
         startButton = new JButton("Старт");
+        getRootPane().setDefaultButton(startButton);
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Закрити вітальне вікно
