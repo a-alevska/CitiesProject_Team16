@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class ComputerTurn extends Utils{
 
     private final UkrainianCities ukrainianCities;
+    private Utils utils = new Utils();
 
     public ComputerTurn(){
         this.ukrainianCities = new UkrainianCities();
@@ -17,6 +18,7 @@ public class ComputerTurn extends Utils{
         if (!city.isEmpty()){
             response = ukrainianCities.getCities().stream()
                     .filter(c -> !equals(city))
+                    .filter(c -> !equals(utils.getUsedCities()))
                     .filter(c -> {
                         String lastLetter = city.substring(city.length() - 1).toUpperCase();
                         String secondLastChar = city.substring(city.length() - 2, city.length() - 1);
@@ -39,7 +41,6 @@ public class ComputerTurn extends Utils{
 
         if (ukrainianCities.containsCity(city) && city.length() != 0) {
             response = generateComputerCityResponse(city);
-            addUsedCity(city);
             addUsedCity(response);
             ukrainianCities.removeCity(city);
             ukrainianCities.removeCity(response);
