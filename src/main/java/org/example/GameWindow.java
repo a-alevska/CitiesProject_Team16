@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,19 +37,20 @@ public class GameWindow extends JFrame {
         JPanel panel = new JPanel();
         JLabel cityLabel = new JLabel();
         cityLabel.setText("Введіть назву міста:");
+        cityLabel.setBorder(new EmptyBorder(0,60 ,0 ,0));
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setLayout(new GridLayout(1, 2));
-        panel.add(cityLabel);
-        panel.add(inputField);
-        panel1.setLayout(new GridLayout(1, 2));
+        panel1.add(cityLabel);
+        panel1.add(inputField);
+        panel1.setLayout(new GridLayout(2, 4));
         panel1.add(playButton);
         panel1.add(computerLabel);
         JLabel imageLabel = new JLabel();
         panel2.add(imageLabel,BorderLayout.CENTER);
         ImageIcon image=new ImageIcon("logo.png");
-        Image scaledImage = image.getImage().getScaledInstance(500, 310, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getImage().getScaledInstance(500, 290, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         imageLabel.setIcon(scaledIcon);
 
