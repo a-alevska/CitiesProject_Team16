@@ -27,6 +27,7 @@ public class GameWindow extends JFrame {
         setTitle("Гра Міста");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
         setLocationRelativeTo(null);
 
         inputField = new JTextField();
