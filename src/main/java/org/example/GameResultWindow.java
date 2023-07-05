@@ -73,6 +73,9 @@ public class GameResultWindow extends JFrame {
         String message =messages.stream().sorted(Comparator.comparingInt(o -> new Random().nextInt())).limit(1).collect(Collectors.joining());
         return message;
     }
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(GameResultWindow::new);
+    }
 }
 
 
