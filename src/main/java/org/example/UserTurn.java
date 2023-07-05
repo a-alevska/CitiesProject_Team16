@@ -23,11 +23,16 @@ public class UserTurn extends Utils{
         this.pointCounter=1;
     }
 
+    public GameWindow getWindow() {
+        return window;
+    }
+
     public boolean isLoser (String city){
         return city.equalsIgnoreCase("здаюсь");
     }
 
     public void makeMove() {
+        window.setVisible(true);
         JLabel computerResponseLabel = window.getComputerResponseLabel();
 
         window.getMakeMoveButton().addActionListener(e -> {
@@ -42,7 +47,7 @@ public class UserTurn extends Utils{
                 JOptionPane.showMessageDialog(null, "Такого міста не існує в Україні.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             String compUp = computerResponseLabel.getText().toUpperCase();
-            if((compUp.length() > " Комп'ютер: ".length()) && !(compUp.substring(compUp.length() - 1).equals(city.substring(0, 1)) || compUp.substring(compUp.length() - 2, compUp.length() - 1).equals(city.substring(0, 1)))){
+            if(!city.equals("здаюсь")&&(compUp.length() > " Комп'ютер: ".length()) && !(compUp.substring(compUp.length() - 1).equals(city.substring(0, 1)) || compUp.substring(compUp.length() - 2, compUp.length() - 1).equals(city.substring(0, 1)))){
                 JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             utils.addUsedCity(city);
@@ -52,7 +57,7 @@ public class UserTurn extends Utils{
                         "Кількість вгаданних міст: " + (pointCounter-1);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
-            } if (computerTurn.generateComputerCityResponse(city).length() == 0) {
+            } if (computerTurn.generateComputerCityResponse(city).length() == 0&&!isLoser(city)) {
                 String message="Кількість вгаданних міст: " + (pointCounter);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);

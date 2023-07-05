@@ -5,8 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WelcomeWindow extends JFrame {
+    UserTurn userTurn = new UserTurn();
 
     public WelcomeWindow() {
+        userTurn.getWindow().setVisible(false);
         setTitle("Гра Міста");
         setSize(400, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,14 +29,8 @@ public class WelcomeWindow extends JFrame {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Закрити вітальне вікно
-                openGameWindow(); // Відкрити вікно гри
-                new UserTurn().makeMove();
+                userTurn.makeMove();
             }
         });
-    }
-
-    private void openGameWindow() {
-        GameWindow gameWindow = new GameWindow();
-        gameWindow.setVisible(true);
     }
 }
