@@ -1,7 +1,6 @@
 package org.example;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,8 +42,6 @@ public class GameWindow extends JFrame {
         panel.setLayout(new GridLayout(1, 2));
         panel.add(cityLabel);
         panel.add(inputField);
-        //panel1.add(playButton,BorderLayout.WEST);
-        //panel1.add(computerLabel);
         panel1.setLayout(new GridLayout(1, 2));
         panel1.add(playButton);
         panel1.add(computerLabel);
@@ -62,13 +59,9 @@ public class GameWindow extends JFrame {
         setVisible(true);
         inputField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                playButton.doClick(); // Enter = "Зробити хід"
+                playButton.doClick();  // Enter = "Зробити хід"
             }
         });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(GameWindow::new);
     }
 }
 

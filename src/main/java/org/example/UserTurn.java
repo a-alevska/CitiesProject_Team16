@@ -2,23 +2,24 @@ package org.example;
 
 import javax.swing.*;
 import java.util.HashSet;
+import java.util.LinkedList;
 
-public class UserTurn implements Utils{
+public class UserTurn extends Utils{
 
     private final GameWindow window;
     private final UkrainianCities ukrainianCities;
-    private final HashSet<String> usedCities;
-    private final int pointCounter;
+    private int pointCounter;
+
+    private final Utils utils = new Utils();
+
+    public void setPointCounter(){
+        pointCounter++;
+    }
 
     public UserTurn(){
         this.window = new GameWindow();
         this.ukrainianCities = new UkrainianCities();
-        this.usedCities=new HashSet<>();
         this.pointCounter=1;
-    }
-
-    public void addUsedCity(String city) {
-        usedCities.add(city);
     }
 
     public boolean isLoser (String city){
@@ -33,10 +34,10 @@ public class UserTurn implements Utils{
             if (city.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
-            if (usedCities.contains(city)) {
+            if (utils.getUsedCities().contains(city)) {
                 JOptionPane.showMessageDialog(null, "Це місто вже було використано. Введіть інше місто.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
-            if (!usedCities.contains(city)&&!ukrainianCities.containsCity(city)&&!isLoser(city)) {
+            if (!utils.getUsedCities().contains(city)&&!ukrainianCities.containsCity(city)&&!isLoser(city)) {
                 JOptionPane.showMessageDialog(null, "Такого міста не існує в Україні.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
 
@@ -48,6 +49,7 @@ public class UserTurn implements Utils{
             } if (new ComputerTurn().generateComputerCityResponse(city).length() == 0) {
                 String message="Кількість вгаданних міст: " + pointCounter;
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
+                SwingUtilities.invokeLater(GameResultWindow::new);
                 window.dispose();
             }
 
@@ -55,6 +57,7 @@ public class UserTurn implements Utils{
             String computerResponse = new ComputerTurn().computerResponse((city));
 
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
+            setPointCounter();
         });
     }
 

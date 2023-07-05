@@ -1,13 +1,13 @@
 package org.example;
 
 import java.io.*;
-import java.util.HashSet;
+import java.util.LinkedList;
 
 public class UkrainianCities {
-    private HashSet<String> cities;
+    private final LinkedList<String> cities;
 
     public UkrainianCities(){
-        cities = new HashSet<>();
+        cities = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("cities.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -24,7 +24,7 @@ public class UkrainianCities {
     public void removeCity(String city) { //видаляє місто з колекції
         cities.remove(city);
     }
-    public HashSet<String> getCities() {
+    public LinkedList<String> getCities() {
         return cities;
     }
 }
