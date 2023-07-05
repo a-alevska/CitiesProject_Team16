@@ -64,8 +64,8 @@ public class UserTurn extends Utils{
                 SwingUtilities.invokeLater(GameResultWindow::new);
             }
 
-            window.getCityTextField().setText("");
             String computerResponse = computerTurn.computerResponse((city));
+            window.getCityTextField().setText("");
 
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
