@@ -21,11 +21,15 @@ public class ComputerTurn extends Utils{
                     .filter(c -> !equals(utils.getUsedCities()))
                     .filter(c -> {
                         String lastLetter = city.substring(city.length() - 1).toUpperCase();
-                        String secondLastChar = city.substring(city.length() - 2, city.length() - 1);
-                        if (lastLetter.equals("Ь")||lastLetter.equals("Й")||lastLetter.equals("И")) {
+                        String secondLastChar = city.substring(city.length() - 2, city.length() - 1).toUpperCase();
+                        String thirdLastChar = city.substring(city.length() - 3, city.length() - 2).toUpperCase();
+                        String twoChars = city.substring(city.length() - 2).toUpperCase();
+                        if(twoChars.equals("ИЙ")) {
+                            return c.substring(0,1).equals(thirdLastChar);
+                        }else if (lastLetter.equals("Ь")||lastLetter.equals("Й")||lastLetter.equals("И")) {
                             return c.substring(0,1).equals(secondLastChar);
                         } else if(secondLastChar.equals("Ь")||secondLastChar.equals("Й")||secondLastChar.equals("И")){
-                            return c.substring(0,1).equals(city.substring(city.length() - 3, city.length() - 2));
+                            return c.substring(0,1).equals(thirdLastChar);
                         }else{
                             return c.substring(0,1).equals(lastLetter);
                         }
