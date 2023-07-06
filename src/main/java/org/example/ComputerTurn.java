@@ -17,6 +17,7 @@ public class ComputerTurn extends Utils{
         String response="";
         if (!city.isEmpty()){
             response = ukrainianCities.getCities().stream()
+                    .filter(c -> ukrainianCities.containsCity(city))
                     .filter(c -> !equals(city))
                     .filter(c -> !equals(utils.getUsedCities()))
                     .filter(c -> {
@@ -28,8 +29,6 @@ public class ComputerTurn extends Utils{
                             return c.substring(0,1).equals(thirdLastChar);
                         }else if (lastLetter.equals("Ь")||lastLetter.equals("Й")||lastLetter.equals("И")) {
                             return c.substring(0,1).equals(secondLastChar);
-                        } else if(secondLastChar.equals("Ь")||secondLastChar.equals("Й")||secondLastChar.equals("И")){
-                            return c.substring(0,1).equals(thirdLastChar);
                         }else{
                             return c.substring(0,1).equals(lastLetter);
                         }
@@ -46,7 +45,6 @@ public class ComputerTurn extends Utils{
         if (ukrainianCities.containsCity(city) && city.length() != 0) {
             response = generateComputerCityResponse(city);
             addUsedCity(response);
-            ukrainianCities.removeCity(city);
             ukrainianCities.removeCity(response);
         }
         return response;

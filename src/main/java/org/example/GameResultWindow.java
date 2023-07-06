@@ -15,9 +15,11 @@ public class GameResultWindow extends JFrame {
 
     private JLabel messageLabel;
 
+    private final ImageIcon img = new ImageIcon("icon.png");
+
     public GameResultWindow() {
 
-
+        this.setIconImage(img.getImage());
         setTitle("Результат гри");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
