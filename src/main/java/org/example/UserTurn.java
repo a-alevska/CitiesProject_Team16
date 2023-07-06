@@ -1,14 +1,29 @@
 package org.example;
 
 import javax.swing.*;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserTurn extends Utils{
 
     private final GameWindow window;
     private final UkrainianCities ukrainianCities;
     private int pointCounter;
+
+    private final Timer timer = new Timer(1000, new ActionListener() {
+
+        int time = 300; // Задаємо початковий час в секундах
+        public void actionPerformed(ActionEvent e) {
+            time--;
+            int minutes = time / 60; // Кількість хвилин
+            int seconds = time % 60; // Кількість секунд
+            String formattedTime = String.format("%02d:%02d", minutes, seconds); // Форматування часу
+            if (time == 0) {
+                endGame();
+            }
+            window.getTimeLabel().setText("Час пішов: " + formattedTime);
+        }
+    });
 
     private final Utils utils = new Utils();
     private final ComputerTurn computerTurn = new ComputerTurn();
@@ -33,6 +48,8 @@ public class UserTurn extends Utils{
 
     public void makeMove() {
         window.setVisible(true);
+        timer.start();
+
         JLabel computerResponseLabel = window.getComputerResponseLabel();
 
         window.getMakeMoveButton().addActionListener(e -> {
@@ -71,6 +88,12 @@ public class UserTurn extends Utils{
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
         });
+    }
+
+    private void endGame() {
+        timer.stop();
+        JOptionPane.showMessageDialog(window, "Гра завершена!\nВаш рахунок: " + pointCounter , "Кінець гри", JOptionPane.INFORMATION_MESSAGE);
+        System.exit(0);
     }
 
 
