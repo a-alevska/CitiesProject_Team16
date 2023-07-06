@@ -51,6 +51,7 @@ public class UserTurn extends Utils{
                 JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             utils.addUsedCity(city);
+            ukrainianCities.removeCity(city);
 
             if (isLoser(city)) {
                 String message = " Ви програли \n " +
@@ -64,7 +65,7 @@ public class UserTurn extends Utils{
                 SwingUtilities.invokeLater(GameResultWindow::new);
             }
 
-            String computerResponse = computerTurn.computerResponse((city));
+            String computerResponse = computerTurn.computerResponse(city);
             window.getCityTextField().setText("");
 
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
