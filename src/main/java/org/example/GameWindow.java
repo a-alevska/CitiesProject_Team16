@@ -11,6 +11,8 @@ public class GameWindow extends JFrame {
     private final JLabel computerLabel;
     private final JButton playButton;
 
+    private final ImageIcon img = new ImageIcon("icon.png");
+
     public JButton getMakeMoveButton() {
         return playButton;
     }
@@ -24,6 +26,7 @@ public class GameWindow extends JFrame {
     }
 
     public GameWindow() {
+        this.setIconImage(img.getImage());
         setTitle("Гра Міста");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

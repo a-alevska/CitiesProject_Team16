@@ -5,10 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WelcomeWindow extends JFrame {
-    UserTurn userTurn = new UserTurn();
+    private final ImageIcon img = new ImageIcon("icon.png");
 
     public WelcomeWindow() {
-        userTurn.getWindow().setVisible(false);
+        this.setIconImage(img.getImage());
         setTitle("Гра Міста");
         setSize(400, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,6 +29,7 @@ public class WelcomeWindow extends JFrame {
         startButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dispose(); // Закрити вітальне вікно
+                UserTurn userTurn = new UserTurn();
                 userTurn.makeMove();
             }
         });
