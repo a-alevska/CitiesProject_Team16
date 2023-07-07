@@ -27,7 +27,7 @@ public class UkrainianFlagAnimation extends JPanel implements ActionListener {
             int y = random.nextInt(HEIGHT);
             int speed=1+random.nextInt(2);
 
-            flags[i] = new UkraineFlag(x, y, FLAG_SIZE /2, Color.BLUE, Color.YELLOW, speed);
+            flags[i] = new UkraineFlag(x, y, FLAG_SIZE /2, Color.BLUE, new Color(255, 210, 0), speed);
         }
 
         timer = new Timer(TIMER_DELAY, this);

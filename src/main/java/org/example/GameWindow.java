@@ -11,22 +11,10 @@ public class GameWindow extends JFrame {
     private final JTextField inputField;
     private final JLabel computerLabel;
     private final JButton playButton;
-    private  int score = 0;
-    private Timer timer;
-
+    private JComboBox<String> modeComboBox;
+    private final JLabel timeLabel = new JLabel();
     private final ImageIcon img = new ImageIcon("icon.png");
 
-    public JButton getMakeMoveButton() {
-        return playButton;
-    }
-
-    public JTextField getCityTextField() {
-        return inputField;
-    }
-
-    public JLabel getComputerResponseLabel() {
-        return computerLabel;
-    }
 
     public GameWindow() {
         this.setIconImage(img.getImage());
@@ -40,8 +28,9 @@ public class GameWindow extends JFrame {
         computerLabel = new JLabel();
         computerLabel.setText("Компьютер:");
         playButton = new JButton("Зробити хід");
-        JLabel choice = new JLabel();
-        JLabel timeLabel = new JLabel();
+        modeComboBox = new JComboBox<>();
+        modeComboBox.addItem("Українські міста");
+        modeComboBox.addItem("Міста всього світу");
 
 
         JPanel panel = new JPanel();
@@ -52,7 +41,7 @@ public class GameWindow extends JFrame {
         JPanel panel2 = new JPanel();
         panel.setLayout(new BorderLayout());
         panel.setLayout(new GridLayout(1, 2));
-        panel.add(choice);
+        panel.add(modeComboBox);
         panel.add(timeLabel);
         panel1.add(cityLabel);
         panel1.add(inputField);
@@ -73,20 +62,6 @@ public class GameWindow extends JFrame {
         setVisible(true);
 
 
-        timer = new Timer(1000, new ActionListener() {
-
-            int time =60; // Задаємо початковий час в секундах
-            public void actionPerformed(ActionEvent e) {
-                time--;
-                timeLabel.setText("Час: " + time);
-                if (time == 0) {
-                    endGame();
-                }
-            }
-        });
-        timer.start();
-
-
         inputField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 playButton.doClick();  // Enter = "Зробити хід"
@@ -94,10 +69,26 @@ public class GameWindow extends JFrame {
         });
 
     }
-    private void endGame() {
-        timer.stop();
-        JOptionPane.showMessageDialog(this, "Гра завершена!\nВаш рахунок: " + score, "Кінець гри", JOptionPane.INFORMATION_MESSAGE);
-        System.exit(0);
+    public JButton getMakeMoveButton() {
+        return playButton;
     }
+
+    public JTextField getCityTextField() {
+        return inputField;
+    }
+
+    public JLabel getComputerResponseLabel() {
+        return computerLabel;
+    }
+
+    public JLabel getTimeLabel(){
+        return timeLabel;
+    }
+
+    public JComboBox<String> getModeComboBox() {
+        return modeComboBox;
+    }
+
+
 }
 
