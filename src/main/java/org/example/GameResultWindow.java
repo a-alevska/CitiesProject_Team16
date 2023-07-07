@@ -25,7 +25,7 @@ public class GameResultWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        ImageIcon image = new ImageIcon("logo2.png");
+        ImageIcon image = new ImageIcon("icon.png");
         Image scaledImage = image.getImage().getScaledInstance(90, 80, Image.SCALE_SMOOTH); // зміна розміру зображення
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel imageLabel = new JLabel(scaledIcon);
@@ -46,12 +46,12 @@ public class GameResultWindow extends JFrame {
 
         JButton restartButton = new JButton("Спробувати ще раз");
 
-        restartButton.setPreferredSize(new Dimension(300, 40));
-
+        restartButton.setPreferredSize(new Dimension(300, 30));
+        restartButton.setBackground(Color.BLUE);
 
         ImageIcon imageIcon = new ImageIcon("repeat.png");
         Image repeat = imageIcon.getImage();
-        Image scaledRepeat = repeat.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        Image scaledRepeat = repeat.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         ImageIcon scaledIconRepeat = new ImageIcon(scaledRepeat);
         restartButton.setIcon(scaledIconRepeat);
         restartButton.setFont(new Font("Comic Sans",5,14));
