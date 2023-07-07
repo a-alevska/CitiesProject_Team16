@@ -28,6 +28,7 @@ public class GameWindow extends JFrame {
         computerLabel = new JLabel();
         computerLabel.setText("Компьютер:");
         playButton = new JButton("Зробити хід");
+        playButton.setFont(new Font("Arial", 1, 12));
         modeComboBox = new JComboBox<>();
         modeComboBox.addItem("Українські міста");
         modeComboBox.addItem("Міста всього світу");
@@ -42,7 +43,9 @@ public class GameWindow extends JFrame {
         panel.setLayout(new BorderLayout());
         panel.setLayout(new GridLayout(1, 2));
         panel.add(modeComboBox);
+        timeLabel.setBorder(new EmptyBorder(0,60 ,0 ,0));
         panel.add(timeLabel);
+
         panel1.add(cityLabel);
         panel1.add(inputField);
         panel1.setLayout(new GridLayout(2, 4));
@@ -51,7 +54,7 @@ public class GameWindow extends JFrame {
         JLabel imageLabel = new JLabel();
         panel2.add(imageLabel,BorderLayout.CENTER);
         ImageIcon image=new ImageIcon("logo.png");
-        Image scaledImage = image.getImage().getScaledInstance(500, 290, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getImage().getScaledInstance(500, 270, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         imageLabel.setIcon(scaledIcon);
 
