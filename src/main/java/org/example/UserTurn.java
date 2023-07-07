@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -30,6 +31,9 @@ public class UserTurn extends Utils{
                 int minutes = time / 60; // Кількість хвилин
                 int seconds = time % 60; // Кількість секунд
                 String formattedTime = String.format("%02d:%02d", minutes, seconds); // Форматування часу
+                if(time<=10){
+                    window.getTimeLabel().setForeground(Color.red);
+                }
                 if (time == 0) {
                     endGame();
                 }
