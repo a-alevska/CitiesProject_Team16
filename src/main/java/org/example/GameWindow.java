@@ -51,7 +51,7 @@ public class GameWindow extends JFrame {
         JLabel imageLabel = new JLabel();
         panel2.add(imageLabel,BorderLayout.CENTER);
         ImageIcon image=new ImageIcon("logo.png");
-        Image scaledImage = image.getImage().getScaledInstance(500, 290, Image.SCALE_SMOOTH);
+        Image scaledImage = image.getImage().getScaledInstance(500, 270, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         imageLabel.setIcon(scaledIcon);
 
