@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class UserTurn extends Utils{
     private final GameWindow window;
@@ -11,20 +13,18 @@ public class UserTurn extends Utils{
     private final Timer timer;
     private int time;
     private final Utils utils = new Utils();
-    private final ComputerTurn computerTurn = new ComputerTurn();
+    private final ComputerTurn computerTurn;
     private WorldCities worldCities;
-    private boolean  isUkrainianMode  = true;
-   private int pointCounter=1;
-
+    private int pointCounter=1;
 
     public UserTurn(){
+        computerTurn = new ComputerTurn();
         this.window = new GameWindow();
-        this.ukrainianCities = new UkrainianCities();
+        ukrainianCities = new UkrainianCities();
         worldCities=new WorldCities();
         time = 300;
 
         timer = new Timer(1000, new ActionListener() {
-
              // Задаємо початковий час в секундах
             public void actionPerformed(ActionEvent e) {
                 time--;
@@ -42,70 +42,13 @@ public class UserTurn extends Utils{
         });
 
     }
-
     public void makeMove() {
-        window.setVisible(true);
-        window.getModeComboBox().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String selectedMode = (String)window.getModeComboBox().getSelectedItem();
-                if (selectedMode.equals("Міста всього світу")) {
-                    window.dispose();
-                    makeMoveWorld();
-                }
-            }
-        });
         restartGame();
-
-        JComboBox<String> modeComboBox2 =window.getModeComboBox();
-        modeComboBox2.setSelectedItem("Українські міста");
+        setGameMode ("Українські міста");
         JLabel computerResponseLabel = window.getComputerResponseLabel();
 
         window.getMakeMoveButton().addActionListener(e -> {
             String city = window.getCityTextField().getText().trim();
-            if (city.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
-                return;}
-            if (utils.getUsedCities().contains(city)) {
-                JOptionPane.showMessageDialog(null, "Це місто вже було використано. Введіть інше місто.", "Помилка", JOptionPane.ERROR_MESSAGE);
-                return;}
-            if (!utils.getUsedCities().contains(city)&&!ukrainianCities.containsCity(city)&&!isLoser(city)) {
-                JOptionPane.showMessageDialog(null, "Такого міста не існує в Україні.", "Помилка", JOptionPane.ERROR_MESSAGE);
-                return;}
-            String compUp = computerResponseLabel.getText().toUpperCase();
-            if(!city.equals("здаюсь")&&(compUp.length() > " Комп'ютер: ".length()) && !(compUp.substring(compUp.length() - 1).equals(city.substring(0, 1)) || compUp.substring(compUp.length() - 2, compUp.length() - 1).equals(city.substring(0, 1)))){
-                JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
-                return;}
-            utils.addUsedCity(city);
-            ukrainianCities.removeCity(city);
-
-            if (isLoser(city)) {
-                String message = " Ви програли \n " +
-                        "Кількість вгаданних міст: " + (pointCounter-1);
-                window.dispose();
-                JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
-            } if (computerTurn.generateComputerCityResponse(city).length() == 0&&!isLoser(city)) {
-                String message="Кількість вгаданних міст: " + (pointCounter);
-                window.dispose();
-                JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
-                SwingUtilities.invokeLater(GameResultWindow::new);
-            }
-
-            String computerResponse = computerTurn.computerResponse(city);
-            window.getCityTextField().setText("");
-
-            computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
-            setPointCounter();
-        });
-    }
-    public void makeMoveWorld() {
-        restartGame();
-        GameWindow window1 = new GameWindow();
-        JComboBox<String> modeComboBox2 =window1.getModeComboBox();
-        modeComboBox2.setSelectedItem("Міста всього світу");
-
-        JLabel computerResponseLabel = window1.getComputerResponseLabel();
-        window1.getMakeMoveButton().addActionListener(e -> {
-            String city = window1.getCityTextField().getText().trim();
             if (!city.isEmpty()) {
                 city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
             }
@@ -115,7 +58,61 @@ public class UserTurn extends Utils{
             if (utils.getUsedCities().contains(city)) {
                 JOptionPane.showMessageDialog(null, "Це місто вже було використано. Введіть інше місто.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
-            if (!utils.getUsedCities().contains(city)&&!worldCities.containsCity(city)&&!isLoser(city)) {
+            if (!ukrainianCities.containsCity(city)&&!isLoser(city)) {
+                JOptionPane.showMessageDialog(null, "Такого міста не існує в Україні.", "Помилка", JOptionPane.ERROR_MESSAGE);
+                return;}
+            String compUp = computerResponseLabel.getText().toUpperCase();
+            if(!city.equals("здаюсь")&&(compUp.length() > " Комп'ютер: ".length()) && !(compUp.substring(compUp.length() - 1).equals(city.substring(0, 1)) || compUp.substring(compUp.length() - 2, compUp.length() - 1).equals(city.substring(0, 1)))){
+                JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
+                return;}
+            if (isLoser(city)) {
+                String message = " Ви програли \n " +
+                        "Кількість вгаданних міст: " + (pointCounter-1);
+                window.dispose();
+                JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
+
+            } if (computerTurn.generateComputerCityResponse(city,ukrainianCities.getCities(),utils.getUsedCities()).isEmpty()&&!isLoser(city)) {
+                String message="Кількість вгаданних міст: " + (pointCounter);
+                window.dispose();
+                JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
+                SwingUtilities.invokeLater(GameResultWindow::new);
+            }
+            String computerResponse = computerTurn.generateComputerCityResponse(city,ukrainianCities.getCities(),utils.getUsedCities());
+            utils.addUsedCity(city);
+            utils.addUsedCity(computerResponse);
+            window.getCityTextField().setText("");
+            computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
+            setPointCounter();
+        });
+        window.getModeComboBox().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selectedMode = (String)  window.getModeComboBox().getSelectedItem();
+                    if (selectedMode.equals("Міста всього світу")) {
+                        window.dispose();
+                        new UserTurn().makeMoveWorld();
+                    }
+                }
+            }
+        });
+    }
+    public void makeMoveWorld() {
+        restartGame();
+        setGameMode ("Міста всього світу");
+        JLabel computerResponseLabel = window.getComputerResponseLabel();
+        window.getMakeMoveButton().addActionListener(e -> {
+            String city = window.getCityTextField().getText().trim();
+            if (!city.isEmpty()) {
+                city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
+            }
+            if (city.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
+                return;}
+            if (utils.getUsedCities().contains(city)) {
+                JOptionPane.showMessageDialog(null, "Це місто вже було використано. Введіть інше місто.", "Помилка", JOptionPane.ERROR_MESSAGE);
+                return;}
+            if (!worldCities.containsCity(city)&&!isLoser(city)) {
                 JOptionPane.showMessageDialog(null, "Дане місто не знайдено у світовій базі даних.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             String compUp = computerResponseLabel.getText().toUpperCase();
@@ -123,32 +120,34 @@ public class UserTurn extends Utils{
                 JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             utils.addUsedCity(city);
-           worldCities.removeCity(city);
 
             if (isLoser(city)) {
                 String message = " Ви програли \n " +
                         "Кількість вгаданних міст: " + (pointCounter-1);
-                window1.dispose();
+                window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
-            } if (computerTurn.generateComputerWorldCityResponse(city).length() == 0&&!isLoser(city)) {
+            } if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(),utils.getUsedCities()).length() == 0&&!isLoser(city)) {
                 String message="Кількість вгаданних міст: " + (pointCounter);
-                window1.dispose();
+                window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
-
             }
-            String computerResponse = computerTurn.computerResponseWorldCity(city);
-            window1.getCityTextField().setText("");
-
+            String computerResponse = computerTurn.generateComputerCityResponse(city,worldCities.getWorldCities(),utils.getUsedCities());
+            utils.addUsedCity(computerResponse);
+            window.getCityTextField().setText("");
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
         });
-        window1.getModeComboBox().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String selectedMode = (String)window1.getModeComboBox().getSelectedItem();
-                if (selectedMode.equals("Українські міста")) {
-                    window1.dispose();
-                    new UserTurn().makeMove();
-                } 
+        window.getModeComboBox().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    String selectedMode = (String)  window.getModeComboBox().getSelectedItem();
+                    if (selectedMode.equals("Українські міста")) {
+                        window.dispose();
+                        new UserTurn().makeMove();
+
+                    }
+                }
             }
         });
     }
@@ -161,9 +160,6 @@ public class UserTurn extends Utils{
         JOptionPane.showMessageDialog(window, "Гра завершена!\nВаш рахунок: " + pointCounter , "Кінець гри", JOptionPane.INFORMATION_MESSAGE);
         System.exit(0);
     }
-    public GameWindow getWindow() {
-        return window;
-    }
     public void setPointCounter(){
         pointCounter++;
     }
@@ -172,6 +168,10 @@ public class UserTurn extends Utils{
         timer.start();
         pointCounter=1;
         getUsedCities().clear();
+    }
+    private void setGameMode(String mode) {
+        JComboBox<String> modeComboBox = window.getModeComboBox();
+        modeComboBox.setSelectedItem(mode);
     }
 
 }
