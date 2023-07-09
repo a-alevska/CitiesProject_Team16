@@ -3,14 +3,13 @@ package org.example;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
 
 public class WorldCities {
-    private final Set<String> worldCities;
+    private final LinkedList<String>worldCities;
 
     public WorldCities(){
-        worldCities = new HashSet<>();
+        worldCities = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("world_cities.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -28,7 +27,7 @@ public class WorldCities {
         worldCities.remove(city);
     }
 
-    public Set<String> getWorldCities() {
+    public LinkedList<String> getWorldCities() {
         return worldCities;
     }
 }
