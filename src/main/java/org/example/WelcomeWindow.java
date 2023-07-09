@@ -1,6 +1,7 @@
 package org.example;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,12 +14,14 @@ public class WelcomeWindow extends JFrame {
         setSize(400, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         JLabel label = new JLabel("Ласкаво просимо до гри Міста!");
         JButton startButton = new JButton("Старт");
         getRootPane().setDefaultButton(startButton);
 
         JPanel panel = new JPanel();
+       panel.setBorder(new EmptyBorder(11,0 ,0 ,0));
         panel.add(label);
         panel.add(startButton);
 
