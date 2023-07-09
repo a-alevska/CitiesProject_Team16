@@ -1,6 +1,7 @@
 package org.example;
 
 
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -8,70 +9,46 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.*;
 
-public class ImageClick extends JPanel {
+import static org.example.UserTurn.pointCounter;
 
-    private List<Point> squarePositions = new ArrayList<>(); // Список позицій квадратиків
-    private int enterCount = 0; // Лічильник натискань клавіші Enter
+
+public class ImageClick extends JPanel  implements ActionListener {
+
+    private List<Point> squarePositions = new ArrayList<>();
+    //    private int enterCount = 0; // Лічильник натискань клавіші Enter
     private int counter = 1;
 
     public ImageClick() {
-        setPreferredSize(new Dimension(500, 290));
-        setFocusable(true);
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_ENTER ) {
-                    enterCount++;
-                    Collections.shuffle(squarePositions); // Перемішування списку
-                    repaint(); // Оновити панель, щоб відобразити перемішані квадрати
 
-                    int count = enterCount * 3;
-                    count = Math.min(count, squarePositions.size());
-                    counter++;
+        setPreferredSize(new Dimension(490, 270));
+//        setFocusable(true);
 
-                    int delay = 500; // Затримка між появою квадратів (у мілісекундах)
-                    Timer timer = new Timer(delay, new ActionListener() {
-                        private int squareIndex = 0;
+        generateSquarePositions(432, 230);
+        generateSquarePositions(440, 230);
+        generateSquarePositions(448, 230);
+        generateSquarePositions(345, 240);
+        generateSquarePositions(365, 240);
+        generateSquarePositions(270, 240);
+        generateSquarePositions(115, 230);
+        generateSquarePositions(177, 170);
+        generateSquarePositions(11, 290);
+        generateSquarePositions(18, 290);
+        generateSquarePositions(26, 290);
 
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            if (squareIndex < 50) {
-                                Point position = squarePositions.get(squareIndex);
-                                squareIndex++;
-                                repaint(); // Оновити панель, щоб відобразити наступний квадрат
-                            } else {
-                                ((Timer) e.getSource()).stop(); // Зупинити таймер, якщо всі квадрати відображені
-                            }
-                        }
-                    });
+        Timer timer = new Timer(2000, this);
+        timer.start();
 
-                    timer.start(); // Запуск таймера
-                }
-            }
-        });
+    }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
 
-        generateSquarePositions(442,230);
+        Collections.shuffle(squarePositions);
+        repaint();
 
-        generateSquarePositions(450,230);
-
-        generateSquarePositions(458,230);
-
-        generateSquarePositions(355,240);
-
-        generateSquarePositions(375,240);
-
-        generateSquarePositions(280,240);
-
-        generateSquarePositions(122,230);
-
-        generateSquarePositions(185,170);
-
-        generateSquarePositions(21,290);
-
-        generateSquarePositions(28,290);
-        generateSquarePositions(36,290);
-
+        int count = pointCounter * 3;
+        count = Math.min(count, squarePositions.size());
+        counter++;
     }
 
     private void generateSquarePositions(int startX, int startY) {
@@ -104,13 +81,12 @@ public class ImageClick extends JPanel {
 
         g.setColor(Color.WHITE);
         for (int i = 0; i < squarePositions.size(); i++) {
-            if (i < enterCount * 3) {
+            if (i < pointCounter * 3) {
                 Point position = squarePositions.get(i);
                 g.fillRect(position.x, position.y, 8, 8);
             }
         }
     }
-
 
 
     public static void main(String[] args) {

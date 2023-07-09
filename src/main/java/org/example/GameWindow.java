@@ -1,7 +1,6 @@
 package org.example;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +13,7 @@ public class GameWindow extends JFrame {
     private JComboBox<String> modeComboBox;
     private final JLabel timeLabel = new JLabel();
     private final ImageIcon img = new ImageIcon("icon.png");
+    ImageClick imageClick = new ImageClick();
 
 
     public GameWindow() {
@@ -52,11 +52,13 @@ public class GameWindow extends JFrame {
         panel1.add(playButton);
         panel1.add(computerLabel);
         JLabel imageLabel = new JLabel();
-        panel2.add(imageLabel,BorderLayout.CENTER);
-        ImageIcon image=new ImageIcon("logo.png");
-        Image scaledImage = image.getImage().getScaledInstance(500, 270, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        imageLabel.setIcon(scaledIcon);
+//        imageLabel.add (imageClick);
+        panel2.add(imageClick,BorderLayout.CENTER);
+//        ImageIcon image=new ImageIcon("logo.png");
+//        Image scaledImage = image.getImage().getScaledInstance(500, 270, Image.SCALE_SMOOTH);
+//        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+//        imageLabel.setIcon(scaledIcon);
+
 
         add(panel, BorderLayout.NORTH);
         add(panel1,BorderLayout.CENTER);

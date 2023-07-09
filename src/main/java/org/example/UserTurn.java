@@ -15,7 +15,7 @@ public class UserTurn extends Utils{
     private final Utils utils = new Utils();
     private final ComputerTurn computerTurn;
     private WorldCities worldCities;
-    private int pointCounter=1;
+   static int pointCounter=1;
 
     public UserTurn(){
         computerTurn = new ComputerTurn();
