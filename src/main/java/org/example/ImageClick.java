@@ -14,7 +14,7 @@ import static org.example.UserTurn.pointCounter;
 
 public class ImageClick extends JPanel  implements ActionListener {
 
-    private List<Point> squarePositions = new ArrayList<>();
+    private final List<Point> squarePositions = new ArrayList<>();
     //    private int enterCount = 0; // Лічильник натискань клавіші Enter
     private int counter = 1;
 
@@ -54,9 +54,8 @@ public class ImageClick extends JPanel  implements ActionListener {
     private void generateSquarePositions(int startX, int startY) {
         int spacing = 20;
         for (int i = 0; i < 5; i++) {
-            int x = startX;
             int y = startY - i * spacing;
-            squarePositions.add(new Point(x, y));
+            squarePositions.add(new Point(startX, y));
         }
     }
 

@@ -3,8 +3,6 @@ package org.example;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Random;
@@ -13,12 +11,9 @@ import java.util.stream.Collectors;
 
 public class GameResultWindow extends JFrame {
 
-    private JLabel messageLabel;
-
-    private final ImageIcon img = new ImageIcon("icon.png");
-
     public GameResultWindow() {
 
+        ImageIcon img = new ImageIcon("icon.png");
         this.setIconImage(img.getImage());
         setTitle("Результат гри");
         setSize(500, 400);
@@ -30,9 +25,9 @@ public class GameResultWindow extends JFrame {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel imageLabel = new JLabel(scaledIcon);
 
-        messageLabel = new JLabel();
+        JLabel messageLabel = new JLabel();
         messageLabel.setBorder(new EmptyBorder(15, 10, 0, 0));
-        messageLabel.setFont(new Font("MV Boli", 2, 15));
+        messageLabel.setFont(new Font("MV Boli", Font.ITALIC, 15));
 
         messageLabel.setText(generateMessage());
 
@@ -66,13 +61,10 @@ public class GameResultWindow extends JFrame {
 
         getRootPane().setDefaultButton(restartButton);
 
-        restartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        restartButton.addActionListener(e -> {
 
-                dispose();
-                new WelcomeWindow(); // Викликати метод для рестарту гри
-            }
+            dispose();
+            new WelcomeWindow(); // Викликати метод для рестарту гри
         });
 
         setVisible(true);
@@ -87,8 +79,7 @@ public class GameResultWindow extends JFrame {
         messages.add("<html>Ти справжній географ України! Твої знання про міста вражають. Успіхів у подальших грах та нових відкриттях!");
         messages.add("<html>Ти володар українських міст. Твоя впевненість та точність в кожному ході здивовують. Продовжуй домінувати на карті!");
         messages.add("<html>Чудово! Ти справжній експерт українських міст. Відправляймося до нових перемог!");
-        String message = messages.stream().sorted(Comparator.comparingInt(o -> new Random().nextInt())).limit(1).collect(Collectors.joining());
-        return message;
+        return messages.stream().sorted(Comparator.comparingInt(o -> new Random().nextInt())).limit(1).collect(Collectors.joining());
     }
 
     public static void main(String[] args) {

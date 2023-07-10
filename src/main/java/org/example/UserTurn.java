@@ -2,10 +2,8 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.Objects;
 
 public class UserTurn extends Utils{
     private final GameWindow window;
@@ -14,7 +12,7 @@ public class UserTurn extends Utils{
     private int time;
     private final Utils utils = new Utils();
     private final ComputerTurn computerTurn;
-    private WorldCities worldCities;
+    private final WorldCities worldCities;
    static int pointCounter=1;
 
     public UserTurn(){
@@ -24,22 +22,20 @@ public class UserTurn extends Utils{
         worldCities=new WorldCities();
         time = 300;
 
-        timer = new Timer(1000, new ActionListener() {
-             // Задаємо початковий час в секундах
-            public void actionPerformed(ActionEvent e) {
-                time--;
-                int minutes = time / 60; // Кількість хвилин
-                int seconds = time % 60; // Кількість секунд
-                String formattedTime = String.format("%02d:%02d", minutes, seconds); // Форматування часу
-                if(time<=10){
-                    window.getTimeLabel().setForeground(Color.red);
-                }
-                if (time == 0) {
-                    endGame();
-                }
-                window.getTimeLabel().setText("Час пішов: " + formattedTime);
-            }
-        });
+        // Задаємо початковий час в секундах
+        timer = new Timer(1000, e -> {
+           time--;
+           int minutes = time / 60; // Кількість хвилин
+           int seconds = time % 60; // Кількість секунд
+           String formattedTime = String.format("%02d:%02d", minutes, seconds); // Форматування часу
+           if(time<=10){
+               window.getTimeLabel().setForeground(Color.red);
+           }
+           if (time == 0) {
+               endGame();
+           }
+           window.getTimeLabel().setText("Час пішов: " + formattedTime);
+       });
 
     }
     public void makeMove() {
@@ -84,15 +80,12 @@ public class UserTurn extends Utils{
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
         });
-        window.getModeComboBox().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    String selectedMode = (String)  window.getModeComboBox().getSelectedItem();
-                    if (selectedMode.equals("Міста всього світу")) {
-                        window.dispose();
-                        new UserTurn().makeMoveWorld();
-                    }
+        window.getModeComboBox().addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                String selectedMode = (String)  window.getModeComboBox().getSelectedItem();
+                if (Objects.requireNonNull(selectedMode).equals("Міста всього світу")) {
+                    window.dispose();
+                    new UserTurn().makeMoveWorld();
                 }
             }
         });
@@ -126,6 +119,7 @@ public class UserTurn extends Utils{
                         "Кількість вгаданних міст: " + (pointCounter-1);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
+
             } if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(),utils.getUsedCities()).length() == 0&&!isLoser(city)) {
                 String message="Кількість вгаданних міст: " + (pointCounter);
                 window.dispose();
@@ -137,16 +131,13 @@ public class UserTurn extends Utils{
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
         });
-        window.getModeComboBox().addItemListener(new ItemListener() {
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    String selectedMode = (String)  window.getModeComboBox().getSelectedItem();
-                    if (selectedMode.equals("Українські міста")) {
-                        window.dispose();
-                        new UserTurn().makeMove();
+        window.getModeComboBox().addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                String selectedMode = (String)  window.getModeComboBox().getSelectedItem();
+                if (Objects.requireNonNull(selectedMode).equals("Українські міста")) {
+                    window.dispose();
+                    new UserTurn().makeMove();
 
-                    }
                 }
             }
         });

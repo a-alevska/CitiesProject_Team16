@@ -3,20 +3,18 @@ package org.example;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class GameWindow extends JFrame {
     private final JTextField inputField;
     private final JLabel computerLabel;
     private final JButton playButton;
-    private JComboBox<String> modeComboBox;
+    private final JComboBox<String> modeComboBox;
     private final JLabel timeLabel = new JLabel();
-    private final ImageIcon img = new ImageIcon("icon.png");
     ImageClick imageClick = new ImageClick();
 
 
     public GameWindow() {
+        ImageIcon img = new ImageIcon("icon.png");
         this.setIconImage(img.getImage());
         setTitle("Гра Міста");
         setSize(500, 400);
@@ -28,7 +26,7 @@ public class GameWindow extends JFrame {
         computerLabel = new JLabel();
         computerLabel.setText("Компьютер:");
         playButton = new JButton("Зробити хід");
-        playButton.setFont(new Font("Arial", 1, 12));
+        playButton.setFont(new Font("Arial", Font.BOLD, 12));
         modeComboBox = new JComboBox<>();
         modeComboBox.addItem("Українські міста");
         modeComboBox.addItem("Міста всього світу");
@@ -51,13 +49,7 @@ public class GameWindow extends JFrame {
         panel1.setLayout(new GridLayout(2, 4));
         panel1.add(playButton);
         panel1.add(computerLabel);
-        JLabel imageLabel = new JLabel();
-//        imageLabel.add (imageClick);
         panel2.add(imageClick,BorderLayout.CENTER);
-//        ImageIcon image=new ImageIcon("logo.png");
-//        Image scaledImage = image.getImage().getScaledInstance(500, 270, Image.SCALE_SMOOTH);
-//        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-//        imageLabel.setIcon(scaledIcon);
 
 
         add(panel, BorderLayout.NORTH);
@@ -67,10 +59,8 @@ public class GameWindow extends JFrame {
         setVisible(true);
 
 
-        inputField.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                playButton.doClick();  // Enter = "Зробити хід"
-            }
+        inputField.addActionListener(e -> {
+            playButton.doClick();  // Enter = "Зробити хід"
         });
 
     }
