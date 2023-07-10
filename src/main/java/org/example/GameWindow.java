@@ -24,7 +24,7 @@ public class GameWindow extends JFrame {
 
         inputField = new JTextField();
         computerLabel = new JLabel();
-        computerLabel.setText("Компьютер:");
+        computerLabel.setText("Комп'ютер:");
         playButton = new JButton("Зробити хід");
         playButton.setFont(new Font("Arial", Font.BOLD, 12));
         modeComboBox = new JComboBox<>();
