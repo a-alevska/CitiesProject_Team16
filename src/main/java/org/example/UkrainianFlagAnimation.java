@@ -54,12 +54,12 @@ public class UkrainianFlagAnimation extends JPanel implements ActionListener {
     }
 
     private static class UkraineFlag {
-        private int x;
+        private final int x;
         private int y;
-        private int stripeHeight;
-        private Color topStripeColor;
-        private Color bottomStripeColor;
-        private int speed;
+        private final int stripeHeight;
+        private final Color topStripeColor;
+        private final Color bottomStripeColor;
+        private final int speed;
 
         public UkraineFlag(int x, int y, int stripeHeight, Color topStripeColor, Color bottomStripeColor, int speed) {
             this.x = x;
@@ -71,11 +71,10 @@ public class UkrainianFlagAnimation extends JPanel implements ActionListener {
         }
 
         public void update() {
-            y+=speed; // Зміна позиції по осі Y
+            y+=speed;
 
             if (y > HEIGHT) {
                 y = -stripeHeight;
-                // Починаємо зверху, якщо конфеті долетіли до нижнього краю
             }
         }
 
@@ -83,26 +82,9 @@ public class UkrainianFlagAnimation extends JPanel implements ActionListener {
             g.setColor(topStripeColor);
             g.fillRect(x, y, FLAG_SIZE, stripeHeight / 2);
 
-            // Малюємо нижню смугу прапора України
             g.setColor(bottomStripeColor);
             g.fillRect(x, y + stripeHeight / 2, FLAG_SIZE, stripeHeight / 2);
         }
     }
-
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            JFrame frame = new JFrame();
-//            frame.setTitle("Анімація Конфеті");
-//            frame.setSize(WIDTH, HEIGHT);
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setLocationRelativeTo(null);
-//
-//            ConfettiAnimation confettiAnimation = new ConfettiAnimation();
-//            frame.getContentPane().add(confettiAnimation);
-//
-//            frame.setVisible(true);
-//        });
-//    }
 
 }

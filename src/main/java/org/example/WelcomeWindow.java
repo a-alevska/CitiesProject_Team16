@@ -28,7 +28,7 @@ public class WelcomeWindow extends JFrame {
         setVisible(true);
 
         startButton.addActionListener(e -> {
-            dispose(); // Закрити вітальне вікно
+            dispose();
             UserTurn userTurn = new UserTurn();
             userTurn.makeMove();
         });

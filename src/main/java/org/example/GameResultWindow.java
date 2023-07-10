@@ -21,7 +21,7 @@ public class GameResultWindow extends JFrame {
         setLocationRelativeTo(null);
 
         ImageIcon image = new ImageIcon("resources/icon.png");
-        Image scaledImage = image.getImage().getScaledInstance(90, 80, Image.SCALE_SMOOTH); // зміна розміру зображення
+        Image scaledImage = image.getImage().getScaledInstance(90, 80, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel imageLabel = new JLabel(scaledIcon);
 
@@ -64,7 +64,7 @@ public class GameResultWindow extends JFrame {
         restartButton.addActionListener(e -> {
 
             dispose();
-            new WelcomeWindow(); // Викликати метод для рестарту гри
+            new WelcomeWindow();
         });
 
         setVisible(true);
@@ -80,11 +80,6 @@ public class GameResultWindow extends JFrame {
         messages.add("<html>Ти володар українських міст. Твоя впевненість та точність в кожному ході здивовують. Продовжуй домінувати на карті!");
         messages.add("<html>Чудово! Ти справжній експерт українських міст. Відправляймося до нових перемог!");
         return messages.stream().sorted(Comparator.comparingInt(o -> new Random().nextInt())).limit(1).collect(Collectors.joining());
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(GameResultWindow::new);
-
     }
 }
 

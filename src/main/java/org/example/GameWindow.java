@@ -60,7 +60,7 @@ public class GameWindow extends JFrame {
 
 
         inputField.addActionListener(e -> {
-            playButton.doClick();  // Enter = "Зробити хід"
+            playButton.doClick();
         });
 
     }

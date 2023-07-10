@@ -22,12 +22,11 @@ public class UserTurn extends Utils{
         worldCities=new WorldCities();
         time = 300;
 
-        // Задаємо початковий час в секундах
         timer = new Timer(1000, e -> {
            time--;
-           int minutes = time / 60; // Кількість хвилин
-           int seconds = time % 60; // Кількість секунд
-           String formattedTime = String.format("%02d:%02d", minutes, seconds); // Форматування часу
+           int minutes = time / 60;
+           int seconds = time % 60;
+           String formattedTime = String.format("%02d:%02d", minutes, seconds);
            if(time<=10){
                window.getTimeLabel().setForeground(Color.red);
            }

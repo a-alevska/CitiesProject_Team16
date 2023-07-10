@@ -27,8 +27,8 @@ public class ComputerTurn extends Utils{
                             return c.substring(0,1).equals(lastLetter);
                         }
                     })
-                    .sorted(Comparator.comparingInt(o -> new Random().nextInt())) //рандомно сортує
-                    .limit(1) //видає лише один перший елемент
+                    .sorted(Comparator.comparingInt(o -> new Random().nextInt()))
+                    .limit(1)
                     .collect(Collectors.joining());}
         return response;
     }
