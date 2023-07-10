@@ -59,9 +59,7 @@ public class GameWindow extends JFrame {
         setVisible(true);
 
 
-        inputField.addActionListener(e -> {
-            playButton.doClick();
-        });
+        inputField.addActionListener(e -> playButton.doClick());
 
     }
     public JButton getMakeMoveButton() {

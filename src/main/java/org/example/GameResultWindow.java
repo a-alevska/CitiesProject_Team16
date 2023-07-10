@@ -49,7 +49,7 @@ public class GameResultWindow extends JFrame {
         Image scaledRepeat = repeat.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         ImageIcon scaledIconRepeat = new ImageIcon(scaledRepeat);
         restartButton.setIcon(scaledIconRepeat);
-        restartButton.setFont(new Font("Comic Sans",5,14));
+        restartButton.setFont(new Font("Comic Sans",Font.BOLD,14));
         JPanel panelButton = new JPanel();
         panelButton.add(restartButton);
         panelButton.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));

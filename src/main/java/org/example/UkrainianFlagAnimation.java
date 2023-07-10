@@ -13,8 +13,7 @@ public class UkrainianFlagAnimation extends JPanel implements ActionListener {
     private static final int FLAG_SIZE = 50;
     private static final int TIMER_DELAY = 20;
 
-    private Timer timer;
-    private UkraineFlag[] flags;
+    private final UkraineFlag[] flags;
 
     public UkrainianFlagAnimation() {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -30,7 +29,7 @@ public class UkrainianFlagAnimation extends JPanel implements ActionListener {
             flags[i] = new UkraineFlag(x, y, FLAG_SIZE /2, Color.BLUE, new Color(255, 210, 0), speed);
         }
 
-        timer = new Timer(TIMER_DELAY, this);
+        Timer timer = new Timer(TIMER_DELAY, this);
         timer.start();
     }
 
