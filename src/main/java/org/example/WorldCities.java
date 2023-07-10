@@ -10,7 +10,7 @@ public class WorldCities {
 
     public WorldCities(){
         worldCities = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("world_cities.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/world_cities.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cityName = line.trim();

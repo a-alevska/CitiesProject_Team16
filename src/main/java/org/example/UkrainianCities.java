@@ -8,7 +8,7 @@ public class UkrainianCities {
 
     public UkrainianCities(){
         cities = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("cities.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("resources/cities.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cityName = line.trim();

@@ -6,7 +6,7 @@ import javax.swing.border.EmptyBorder;
 public class WelcomeWindow extends JFrame {
 
     public WelcomeWindow() {
-        ImageIcon img = new ImageIcon("icon.png");
+        ImageIcon img = new ImageIcon("resources/icon.png");
         this.setIconImage(img.getImage());
         setTitle("Гра Міста");
         setSize(400, 100);

@@ -14,7 +14,7 @@ public class GameWindow extends JFrame {
 
 
     public GameWindow() {
-        ImageIcon img = new ImageIcon("icon.png");
+        ImageIcon img = new ImageIcon("resources/icon.png");
         this.setIconImage(img.getImage());
         setTitle("Гра Міста");
         setSize(500, 400);

@@ -13,14 +13,14 @@ public class GameResultWindow extends JFrame {
 
     public GameResultWindow() {
 
-        ImageIcon img = new ImageIcon("icon.png");
+        ImageIcon img = new ImageIcon("resources/icon.png");
         this.setIconImage(img.getImage());
         setTitle("Результат гри");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        ImageIcon image = new ImageIcon("icon.png");
+        ImageIcon image = new ImageIcon("resources/icon.png");
         Image scaledImage = image.getImage().getScaledInstance(90, 80, Image.SCALE_SMOOTH); // зміна розміру зображення
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         JLabel imageLabel = new JLabel(scaledIcon);
@@ -44,7 +44,7 @@ public class GameResultWindow extends JFrame {
         restartButton.setPreferredSize(new Dimension(300, 30));
         restartButton.setBackground(Color.BLUE);
 
-        ImageIcon imageIcon = new ImageIcon("repeat.png");
+        ImageIcon imageIcon = new ImageIcon("resources/repeat.png");
         Image repeat = imageIcon.getImage();
         Image scaledRepeat = repeat.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
         ImageIcon scaledIconRepeat = new ImageIcon(scaledRepeat);

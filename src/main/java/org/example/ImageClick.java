@@ -63,7 +63,7 @@ public class ImageClick extends JPanel  implements ActionListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        ImageIcon imageIcon = new ImageIcon("logo.png");
+        ImageIcon imageIcon = new ImageIcon("resources/logo.png");
         Image image = imageIcon.getImage();
 
         int panelWidth = getWidth();
