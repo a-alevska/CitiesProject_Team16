@@ -118,6 +118,7 @@ public class UserTurn extends Utils{
                         "Кількість вгаданних міст: " + (pointCounter-1);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
 
             } if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(),utils.getUsedCities()).length() == 0&&!isLoser(city)) {
                 String message="Кількість вгаданних міст: " + (pointCounter);

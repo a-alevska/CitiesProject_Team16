@@ -21,9 +21,7 @@ public class UkrainianCities {
     public boolean containsCity(String city) { //метод перевіряє чи є таке місто в колекції
         return cities.contains(city);
     }
-    public void removeCity(String city) { //видаляє місто з колекції
-        cities.remove(city);
-    }
+
     public LinkedList<String> getCities() {
         return cities;
     }

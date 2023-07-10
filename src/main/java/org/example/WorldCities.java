@@ -23,10 +23,6 @@ public class WorldCities {
     public boolean containsCity(String city) { //метод перевіряє чи є таке місто в колекції
         return worldCities.contains(city);
     }
-    public void removeCity(String city) { //видаляє місто з колекції
-        worldCities.remove(city);
-    }
-
     public LinkedList<String> getWorldCities() {
         return worldCities;
     }
