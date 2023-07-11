@@ -67,7 +67,7 @@ public class UserTurn extends Utils{
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
 
-            } if (computerTurn.generateComputerCityResponse(city,ukrainianCities.getCities(),utils.getUsedCities()).isEmpty()&&!isLoser(city)) {
+            } if (computerTurn.generateComputerCityResponse(city,ukrainianCities.getCities(),utils.getUsedCities()).isEmpty()&&!isLoser(city)||pointCounter>10) {
                 String message="Кількість вгаданних міст: " + (pointCounter);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
@@ -120,11 +120,11 @@ public class UserTurn extends Utils{
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
-
-            } if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(),utils.getUsedCities()).length() == 0&&!isLoser(city)) {
+            } if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(),utils.getUsedCities()).length() == 0&&!isLoser(city)||pointCounter>10) {
                 String message="Кількість вгаданних міст: " + (pointCounter);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
+                SwingUtilities.invokeLater(GameResultWindowWorld::new);
             }
             String computerResponse = computerTurn.generateComputerCityResponse(city,worldCities.getWorldCities(),utils.getUsedCities());
             utils.addUsedCity(computerResponse);

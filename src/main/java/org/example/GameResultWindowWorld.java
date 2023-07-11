@@ -1,9 +1,12 @@
 package org.example;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -12,50 +15,61 @@ import static org.example.UserTurn.pointCounter;
 public class GameResultWindowWorld extends JFrame {
 
     public GameResultWindowWorld() {
+        try {
+            ImageIcon img = new ImageIcon(ImageIO.read(Objects.requireNonNull(GameResultWindow.class.getResource("/icon.png"))));
+            this.setIconImage(img.getImage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        
         setTitle("Результат гри: " + (pointCounter - 1));
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
 
-        ImageIcon image = new ImageIcon("globe.png");
-        Image scaledImage = image.getImage().getScaledInstance(240, 300, Image.SCALE_SMOOTH);
-        ImageIcon scaledIcon = new ImageIcon(scaledImage);
-        JLabel imageLabel = new JLabel(scaledIcon);
+        try {
+            ImageIcon image = new ImageIcon(ImageIO.read(Objects.requireNonNull(GameResultWindowWorld.class.getResource("/globe.png"))));
+            Image scaledImage = image.getImage().getScaledInstance(240, 300, Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+            JLabel imageLabel = new JLabel(scaledIcon);
 
-        JLabel messageLabel = new JLabel();
-        messageLabel.setFont(new Font("Arial", Font.PLAIN, 18));
-        messageLabel.setText(generateMessage());
+            JLabel messageLabel = new JLabel();
+            messageLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+            messageLabel.setText(generateMessage());
 
-        JPanel panelNorth = new JPanel();
-        panelNorth.setLayout(new BoxLayout(panelNorth, BoxLayout.X_AXIS));
-        panelNorth.add(imageLabel);
-        panelNorth.add(Box.createHorizontalGlue());
-        panelNorth.add(messageLabel);
+            JPanel panelNorth = new JPanel();
+            panelNorth.setLayout(new BoxLayout(panelNorth, BoxLayout.X_AXIS));
+            panelNorth.add(imageLabel);
+            panelNorth.add(Box.createHorizontalGlue());
+            panelNorth.add(messageLabel);
 
-        JButton restartButton = new JButton("Спробувати ще раз");
-        restartButton.setPreferredSize(new Dimension(300, 30));
-        restartButton.setBackground(Color.BLUE);
+            JButton restartButton = new JButton("Спробувати ще раз");
+            restartButton.setPreferredSize(new Dimension(300, 30));
+            restartButton.setBackground(Color.BLUE);
 
-        ImageIcon imageIcon = new ImageIcon("/repeat.png");
-        Image repeat = imageIcon.getImage();
-        Image scaledRepeat = repeat.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
-        ImageIcon scaledIconRepeat = new ImageIcon(scaledRepeat);
-        restartButton.setIcon(scaledIconRepeat);
-        restartButton.setFont(new Font("Arial", Font.BOLD, 14));
+            ImageIcon imageIcon = new ImageIcon(ImageIO.read(Objects.requireNonNull(GameResultWindowWorld.class.getResource("/repeat.png"))));
+            Image repeat = imageIcon.getImage();
+            Image scaledRepeat = repeat.getScaledInstance(15, 15, Image.SCALE_SMOOTH);
+            ImageIcon scaledIconRepeat = new ImageIcon(scaledRepeat);
+            restartButton.setIcon(scaledIconRepeat);
+            restartButton.setFont(new Font("Arial", Font.BOLD, 14));
 
-        JPanel panelButton = new JPanel();
-        panelButton.add(restartButton);
-        panelButton.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
+            JPanel panelButton = new JPanel();
+            panelButton.add(restartButton);
+            panelButton.setBorder(BorderFactory.createEmptyBorder(20, 0, 10, 0));
 
-        add(panelNorth, BorderLayout.NORTH);
-        add(panelButton, BorderLayout.SOUTH);
-        getRootPane().setDefaultButton(restartButton);
+            add(panelNorth, BorderLayout.NORTH);
+            add(panelButton, BorderLayout.SOUTH);
+            getRootPane().setDefaultButton(restartButton);
 
-        restartButton.addActionListener(e -> {
-            dispose();
-            new WelcomeWindow();
-        });
+            restartButton.addActionListener(e -> {
+                dispose();
+                new WelcomeWindow();
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         setVisible(true);
     }
