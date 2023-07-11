@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.LinkedList;
 
 public class WorldCities {
@@ -10,7 +8,8 @@ public class WorldCities {
 
     public WorldCities(){
         worldCities = new LinkedList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader("resources/world_cities.txt"))) {
+        try (InputStream inputStream = getClass().getResourceAsStream("/world_cities.txt");
+             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cityName = line.trim();

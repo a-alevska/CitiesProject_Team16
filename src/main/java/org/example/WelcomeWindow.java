@@ -1,13 +1,20 @@
 package org.example;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.io.IOException;
+import java.util.Objects;
 
 public class WelcomeWindow extends JFrame {
 
     public WelcomeWindow() {
-        ImageIcon img = new ImageIcon("resources/icon.png");
-        this.setIconImage(img.getImage());
+        try {
+            ImageIcon img = new ImageIcon(ImageIO.read(Objects.requireNonNull(WelcomeWindow.class.getResource("/icon.png"))));
+            this.setIconImage(img.getImage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         setTitle("Гра Міста");
         setSize(400, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
