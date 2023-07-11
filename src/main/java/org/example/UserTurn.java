@@ -8,11 +8,12 @@ import java.util.Objects;
 public class UserTurn extends Utils{
     private final GameWindow window;
     private final UkrainianCities ukrainianCities;
+    private final WorldCities worldCities;
     private final Timer timer;
     private int time;
     private final Utils utils = new Utils();
     private final ComputerTurn computerTurn;
-    private final WorldCities worldCities;
+
    static int pointCounter=1;
 
     public UserTurn(){
@@ -56,8 +57,8 @@ public class UserTurn extends Utils{
             if (!ukrainianCities.containsCity(city)&&!isLoser(city)) {
                 JOptionPane.showMessageDialog(null, "Такого міста не існує в Україні.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
-            String compUp = computerResponseLabel.getText().toUpperCase();
-            if(!isLoser(city)&&(compUp.length() > " Комп'ютер: ".length()) && !(compUp.substring(compUp.length() - 1).equals(city.substring(0, 1)) || compUp.substring(compUp.length() - 2, compUp.length() - 1).equals(city.substring(0, 1)))){
+            String lastResponse = computerResponseLabel.getText();
+            if(!computerTurn.isCityValid(city,lastResponse)&&!isLoser(city)&&(lastResponse.length() > " Комп'ютер: ".length())){
                 JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             if (isLoser(city)) {
@@ -107,8 +108,8 @@ public class UserTurn extends Utils{
             if (!worldCities.containsCity(city)&&!isLoser(city)) {
                 JOptionPane.showMessageDialog(null, "Дане місто не знайдено у світовій базі даних.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
-            String compUp = computerResponseLabel.getText().toUpperCase();
-            if(!isLoser(city)&&(compUp.length() > " Комп'ютер: ".length()) && !(compUp.substring(compUp.length() - 1).equals(city.substring(0, 1)) || compUp.substring(compUp.length() - 2, compUp.length() - 1).equals(city.substring(0, 1)))){
+            String lastResponse = computerResponseLabel.getText();
+            if(!computerTurn.isCityValid(city,lastResponse)&&!isLoser(city)&&(lastResponse.length() > " Комп'ютер: ".length())){
                 JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
             utils.addUsedCity(city);
