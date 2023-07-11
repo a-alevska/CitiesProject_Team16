@@ -76,7 +76,6 @@ public class GameResultWindow extends JFrame {
             setVisible(true);
         } catch (IOException e) {
             throw new RuntimeException(e);
-
         }
     }
 

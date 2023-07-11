@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.*;
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class UkrainianCities {
     private final LinkedList<String> cities;
@@ -9,7 +10,7 @@ public class UkrainianCities {
     public UkrainianCities(){
         cities = new LinkedList<>();
         try (InputStream inputStream = getClass().getResourceAsStream("/cities.txt");
-             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+             BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cityName = line.trim();
