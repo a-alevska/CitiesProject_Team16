@@ -30,4 +30,10 @@ public class ComputerTurn  {
             String firstLetter = city.substring(0, 1);
             return lastLetter.equalsIgnoreCase(firstLetter);
         }
+        public String capitalizeFirstLetter (String city){
+            if (!city.isEmpty()) {
+                city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
+            }
+            return city;
+        }
     }

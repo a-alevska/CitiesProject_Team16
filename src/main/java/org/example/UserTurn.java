@@ -45,9 +45,7 @@ public class UserTurn extends Utils{
 
         window.getMakeMoveButton().addActionListener(e -> {
             String city = window.getCityTextField().getText().trim();
-            if (!city.isEmpty()) {
-                city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
-            }
+            computerTurn.capitalizeFirstLetter(city);
             if (city.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
@@ -96,9 +94,7 @@ public class UserTurn extends Utils{
         JLabel computerResponseLabel = window.getComputerResponseLabel();
         window.getMakeMoveButton().addActionListener(e -> {
             String city = window.getCityTextField().getText().trim();
-            if (!city.isEmpty()) {
-                city = city.substring(0, 1).toUpperCase() + city.substring(1).toLowerCase();
-            }
+            computerTurn.capitalizeFirstLetter(city);
             if (city.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}
