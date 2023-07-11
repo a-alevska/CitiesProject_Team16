@@ -18,7 +18,7 @@ public class UserTurn extends Utils{
 
     public UserTurn(){
         computerTurn = new ComputerTurn();
-        this.window = new GameWindow();
+        window = new GameWindow();
         ukrainianCities = new UkrainianCities();
         worldCities=new WorldCities();
         time = 300;
@@ -94,7 +94,7 @@ public class UserTurn extends Utils{
         JLabel computerResponseLabel = window.getComputerResponseLabel();
         window.getMakeMoveButton().addActionListener(e -> {
             String city = window.getCityTextField().getText().trim();
-            computerTurn.capitalizeFirstLetter(city);
+            city = computerTurn.capitalizeFirstLetter(city);
             if (city.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;}

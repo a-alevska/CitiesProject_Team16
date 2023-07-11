@@ -11,6 +11,8 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static org.example.UserTurn.pointCounter;
+
 
 public class GameResultWindow extends JFrame {
 
@@ -21,7 +23,7 @@ public class GameResultWindow extends JFrame {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        setTitle("Результат гри");
+        setTitle("Результат гри: " + (pointCounter - 1));
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -32,8 +34,8 @@ public class GameResultWindow extends JFrame {
             ImageIcon scaledIcon = new ImageIcon(scaledImage);
             JLabel imageLabel = new JLabel(scaledIcon);
             JLabel messageLabel = new JLabel();
-            messageLabel.setBorder(new EmptyBorder(15, 10, 0, 0));
-            messageLabel.setFont(new Font("MV Boli", Font.ITALIC, 15));
+            messageLabel.setBorder(new EmptyBorder(0, 10, 0, 0));
+            messageLabel.setFont(new Font("Arial", Font.PLAIN, 16));
 
             messageLabel.setText(generateMessage());
 
