@@ -4,36 +4,35 @@ package org.example;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 
 import static org.example.UserTurn.pointCounter;
-
 
 public class ImageClick extends JPanel implements ActionListener {
 
     private final List<Point> squarePositions = new ArrayList<>();
+    private List<Color> colors = new ArrayList<>();
 
     public ImageClick() {
 
         setPreferredSize(new Dimension(490, 270));
-        generateSquarePositions(432, 230);
-        generateSquarePositions(440, 230);
-        generateSquarePositions(448, 230);
+        generateSquarePositions(430, 230);
+        generateSquarePositions(440 , 230);
+        generateSquarePositions(450, 230);
         generateSquarePositions(345, 240);
         generateSquarePositions(365, 240);
         generateSquarePositions(270, 240);
-        generateSquarePositions(115, 230);
-        generateSquarePositions(177, 170);
+        generateSquarePositions(118, 230);
+        generateSquarePositions(179, 170);
         generateSquarePositions(11, 290);
-        generateSquarePositions(18, 290);
-        generateSquarePositions(26, 290);
+        generateSquarePositions(21, 290);
+        generateSquarePositions(31, 290);
 
-        Timer timer = new Timer(2000, this);
+        Timer timer = new Timer(3000, this);
         timer.start();
 
     }
@@ -68,19 +67,35 @@ public class ImageClick extends JPanel implements ActionListener {
 
             int scaledWidth = (int) (imageWidth * scale);
             int scaledHeight = (int) (imageHeight * scale);
-
             g.drawImage(image, 0, 0, scaledWidth, scaledHeight, null);
 
-            g.setColor(Color.WHITE);
+            Graphics2D g2d = (Graphics2D) g.create();
+
+            for (int i = 0; i < squarePositions.size(); i++) {
+                if (i < squarePositions.size() / 2) {
+                    colors.add(Color.BLUE);
+                } else {
+                    colors.add(new Color(255, 210, 0));
+                }
+            }
+
+            Collections.shuffle(squarePositions);
+            Collections.shuffle(colors);
+
             for (int i = 0; i < squarePositions.size(); i++) {
                 if (i < pointCounter * 5) {
                     Point position = squarePositions.get(i);
-                    g.fillRect(position.x, position.y, 8, 8);
+                    Color color = colors.get(i);
+                    g2d.setColor(color);
+                    g2d.fillRect(position.x, position.y, 7, 7);
                 }
             }
+            g2d.dispose();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
     }
 }
 
