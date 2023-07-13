@@ -1,4 +1,4 @@
-package org.example;
+package org.example.ui;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static org.example.UserTurn.pointCounter;
+import static org.example.logic.UserTurn.pointCounter;
 
 public class GameResultWindowWorld extends JFrame {
 

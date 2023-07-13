@@ -1,30 +1,29 @@
-package org.example;
+package org.example.collections;
 
 import java.io.*;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public class UkrainianCities {
-    private final LinkedList<String> cities;
+public class WorldCities {
+    private final LinkedList<String>worldCities;
 
-    public UkrainianCities(){
-        cities = new LinkedList<>();
-        try (InputStream inputStream = getClass().getResourceAsStream("/cities.txt");
+    public WorldCities(){
+        worldCities = new LinkedList<>();
+        try (InputStream inputStream = getClass().getResourceAsStream("/world_cities.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cityName = line.trim();
-                cities.add(cityName);
+               worldCities.add(cityName);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public boolean containsCity(String city) { //метод перевіряє чи є таке місто в колекції
-        return cities.contains(city);
+        return worldCities.contains(city);
     }
-
-    public LinkedList<String> getCities() {
-        return cities;
+    public LinkedList<String> getWorldCities() {
+        return worldCities;
     }
 }

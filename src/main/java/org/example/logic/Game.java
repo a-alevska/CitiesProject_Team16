@@ -1,4 +1,6 @@
-package org.example;
+package org.example.logic;
+
+import org.example.ui.WelcomeWindow;
 
 import javax.swing.*;
 

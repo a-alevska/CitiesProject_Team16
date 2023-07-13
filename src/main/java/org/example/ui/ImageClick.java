@@ -1,4 +1,4 @@
-package org.example;
+package org.example.ui;
 
 
 import java.awt.*;
@@ -10,12 +10,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.Timer;
 
-import static org.example.UserTurn.pointCounter;
+import static org.example.logic.UserTurn.pointCounter;
 
 public class ImageClick extends JPanel implements ActionListener {
 
     private final List<Point> squarePositions = new ArrayList<>();
-    private List<Color> colors = new ArrayList<>();
+    private final List<Color> colors = new ArrayList<>();
 
     public ImageClick() {
 

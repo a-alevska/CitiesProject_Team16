@@ -1,4 +1,11 @@
-package org.example;
+package org.example.logic;
+
+import org.example.collections.UkrainianCities;
+import org.example.collections.WorldCities;
+import org.example.ui.GameResultWindow;
+import org.example.ui.GameResultWindowWorld;
+import org.example.ui.GameWindow;
+import org.example.ui.WelcomeWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +21,7 @@ public class UserTurn extends Utils {
     private final Utils utils = new Utils();
     private final ComputerTurn computerTurn;
 
-    static int pointCounter = 1;
+    public static int pointCounter = 1;
 
     public UserTurn() {
         computerTurn = new ComputerTurn();

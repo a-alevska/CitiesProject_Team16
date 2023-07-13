@@ -1,4 +1,4 @@
-package org.example;
+package org.example.logic;
 
 import java.util.Comparator;
 import java.util.LinkedList;

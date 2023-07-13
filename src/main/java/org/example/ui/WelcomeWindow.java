@@ -1,4 +1,6 @@
-package org.example;
+package org.example.ui;
+
+import org.example.logic.UserTurn;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
