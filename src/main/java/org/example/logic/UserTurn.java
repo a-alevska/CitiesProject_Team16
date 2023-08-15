@@ -12,13 +12,13 @@ import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.util.Objects;
 
-public class UserTurn extends Utils {
+public class  UserTurn extends UsedCities {
     private final GameWindow window;
     private final UkrainianCities ukrainianCities;
     private final WorldCities worldCities;
     private final Timer timer;
     private int time;
-    private final Utils utils = new Utils();
+    private final UsedCities usedCities = new UsedCities();
     private final ComputerTurn computerTurn;
 
     public static int pointCounter = 1;
@@ -57,7 +57,7 @@ public class UserTurn extends Utils {
                 JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (utils.getUsedCities().contains(city)) {
+            if (usedCities.getUsedCity().contains(city)) {
                 JOptionPane.showMessageDialog(null, "Це місто вже було використано. Введіть інше місто.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -77,15 +77,15 @@ public class UserTurn extends Utils {
                 new WelcomeWindow();
 
             }
-            if (computerTurn.generateComputerCityResponse(city, ukrainianCities.getCities(), utils.getUsedCities()).isEmpty() && !isLoser(city) || pointCounter > 9) {
+            if (computerTurn.generateComputerCityResponse(city, ukrainianCities.getUkrainianCityNames(), usedCities.getUsedCity()).isEmpty() && !isLoser(city) || pointCounter > 9) {
                 String message = "Кількість вгаданних міст: " + (pointCounter);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
                 SwingUtilities.invokeLater(GameResultWindow::new);
             }
-            String computerResponse = computerTurn.generateComputerCityResponse(city, ukrainianCities.getCities(), utils.getUsedCities());
-            utils.addUsedCity(city);
-            utils.addUsedCity(computerResponse);
+            String computerResponse = computerTurn.generateComputerCityResponse(city, ukrainianCities.getUkrainianCityNames(), usedCities.getUsedCity());
+            usedCities.addUsedCity(city);
+            usedCities.addUsedCity(computerResponse);
             window.getCityTextField().setText("");
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
@@ -113,7 +113,7 @@ public class UserTurn extends Utils {
                 JOptionPane.showMessageDialog(null, "Введіть назву міста.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (utils.getUsedCities().contains(city)) {
+            if (usedCities.getUsedCity().contains(city)) {
                 JOptionPane.showMessageDialog(null, "Це місто вже було використано. Введіть інше місто.", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -126,7 +126,7 @@ public class UserTurn extends Utils {
                 JOptionPane.showMessageDialog(null, "Введіть місто, що починається на останню (чи попередню) букву відповіді комп'ютера!", "Помилка", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            utils.addUsedCity(city);
+            usedCities.addUsedCity(city);
 
             if (isLoser(city)) {
                 String message = " Ви програли \n " + "Кількість вгаданних міст: " + (pointCounter - 1);
@@ -134,14 +134,14 @@ public class UserTurn extends Utils {
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
                 new WelcomeWindow();
             }
-            if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(), utils.getUsedCities()).length() == 0 && !isLoser(city) || pointCounter > 9) {
+            if (computerTurn.generateComputerCityResponse(city, worldCities.getWorldCityNames(), usedCities.getUsedCity()).length() == 0 && !isLoser(city) || pointCounter > 9) {
                 String message = "Кількість вгаданних міст: " + (pointCounter);
                 window.dispose();
                 JOptionPane.showMessageDialog(null, message, "Гра закінчена", JOptionPane.INFORMATION_MESSAGE);
                 SwingUtilities.invokeLater(GameResultWindowWorld::new);
             }
-            String computerResponse = computerTurn.generateComputerCityResponse(city, worldCities.getWorldCities(), utils.getUsedCities());
-            utils.addUsedCity(computerResponse);
+            String computerResponse = computerTurn.generateComputerCityResponse(city, worldCities.getWorldCityNames(), usedCities.getUsedCity());
+            usedCities.addUsedCity(computerResponse);
             window.getCityTextField().setText("");
             computerResponseLabel.setText(" Комп'ютер: " + computerResponse);
             setPointCounter();
@@ -177,7 +177,7 @@ public class UserTurn extends Utils {
         time = 300;
         timer.start();
         pointCounter = 1;
-        getUsedCities().clear();
+        getUsedCity().clear();
     }
 
     private void setGameMode(String mode) {

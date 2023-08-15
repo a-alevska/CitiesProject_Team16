@@ -21,7 +21,7 @@ public class ImageClick extends JPanel implements ActionListener {
 
         setPreferredSize(new Dimension(490, 270));
         generateSquarePositions(430, 230);
-        generateSquarePositions(440 , 230);
+        generateSquarePositions(440, 230);
         generateSquarePositions(450, 230);
         generateSquarePositions(345, 240);
         generateSquarePositions(365, 240);

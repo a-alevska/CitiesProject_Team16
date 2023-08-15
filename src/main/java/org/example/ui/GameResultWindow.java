@@ -15,6 +15,7 @@ import static org.example.logic.UserTurn.pointCounter;
 
 
 public class GameResultWindow extends JFrame {
+    private final Random random = new Random();
 
     public GameResultWindow() {
         try {
@@ -25,7 +26,7 @@ public class GameResultWindow extends JFrame {
         }
         setTitle("Результат гри: " + (pointCounter - 1));
         setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         try {
@@ -90,7 +91,7 @@ public class GameResultWindow extends JFrame {
         messages.add("<html>Ти справжній географ України! Твої знання про міста вражають. Успіхів у подальших грах та нових відкриттях!");
         messages.add("<html>Ти володар українських міст. Твоя впевненість та точність в кожному ході здивовують. Продовжуй домінувати на карті!");
         messages.add("<html>Чудово! Ти справжній експерт українських міст. Відправляймося до нових перемог!");
-        return messages.stream().sorted(Comparator.comparingInt(o -> new Random().nextInt())).limit(1).collect(Collectors.joining());
+        return messages.stream().sorted(Comparator.comparingInt(o -> random.nextInt())).limit(1).collect(Collectors.joining());
     }
 }
 

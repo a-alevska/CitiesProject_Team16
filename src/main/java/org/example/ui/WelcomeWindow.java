@@ -19,7 +19,7 @@ public class WelcomeWindow extends JFrame {
         }
         setTitle("Гра Міста");
         setSize(400, 100);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
 

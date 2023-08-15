@@ -1,29 +1,31 @@
 package org.example.collections;
 
 import java.io.*;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class WorldCities {
-    private final LinkedList<String>worldCities;
+    private final Set<String> worldCityNames;
 
     public WorldCities(){
-        worldCities = new LinkedList<>();
+        worldCityNames = new HashSet<>();
         try (InputStream inputStream = getClass().getResourceAsStream("/world_cities.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(inputStream)))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String cityName = line.trim();
-               worldCities.add(cityName);
+               worldCityNames.add(cityName);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public boolean containsCity(String city) { //метод перевіряє чи є таке місто в колекції
-        return worldCities.contains(city);
+        return worldCityNames.contains(city);
     }
-    public LinkedList<String> getWorldCities() {
-        return worldCities;
+
+    public Set<String> getWorldCityNames() {
+        return worldCityNames;
     }
 }

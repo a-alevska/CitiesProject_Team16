@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 import static org.example.logic.UserTurn.pointCounter;
 
 public class GameResultWindowWorld extends JFrame {
+    private final Random random = new Random();
 
     public GameResultWindowWorld() {
         try {
@@ -24,7 +25,7 @@ public class GameResultWindowWorld extends JFrame {
         
         setTitle("Результат гри: " + (pointCounter - 1));
         setSize(500, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -86,7 +87,7 @@ public class GameResultWindowWorld extends JFrame {
         messages.add("<html>Ти - Містер/Міс Глобус! Твої знання про міста настільки широкі, що здивовують навіть пташок на небі!");
         messages.add("<html>Ти - справжній географічний ерудит! Твої знання про міста вразять навіть вчених з Національної географічної асоціації!");
         messages.add("<html>Ти - географічний гурман! Твої знання про міста - це шедевр, як Ейфелева вежа!");
-        return messages.stream().sorted(Comparator.comparingInt(o -> new Random().nextInt())).limit(1).collect(Collectors.joining());
+        return messages.stream().sorted(Comparator.comparingInt(o -> random.nextInt())).limit(1).collect(Collectors.joining());
     }
 }
 
